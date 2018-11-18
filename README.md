@@ -2,6 +2,22 @@
 
 > Vue.js拖曳簡易示範
 
+緣由
+
+希望藉由滑鼠拖曳動作來加速人員的班表排定
+
+使用情境為桌上型系統
+
+使用的套件
+
+框架 [Vue-CLI 2](https://github.com/vuejs/vue-cli)
+
+日期 [Moment.js](https://momentjs.com/)
+
+UI [Bootstrap 4](https://getbootstrap.com/)
+
+icon [Font Awesome](https://fontawesome.com/)
+
 ## Build Setup
 
 ``` bash
