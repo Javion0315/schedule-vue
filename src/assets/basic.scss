@@ -1,0 +1,145 @@
+$work: #4FC3F7 !default;
+$off: #81C784 !default;
+$holiday: #F06292 !default;
+$grey: #eee !default;
+$workClass: #45b8ee !default;
+$theme-colors: () !default;
+$theme-colors: map-merge(( "work": $work, "off": $off, "holiday": $holiday, "grey": $grey, "workClass": $workClass), $theme-colors);
+/* stylelint-enable */
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+// @import "node_modules/bootstrap/scss/root";
+// @import "node_modules/bootstrap/scss/reboot";
+
+@import "node_modules/bootstrap/scss/tables";
+
+@mixin bg-variant($value) {
+  background-color: $value !important;
+}
+
+@mixin border-variant($value) {
+  border-bottom-color: $value !important;
+}
+
+@mixin text-variant($value) {
+  color: $value;
+}
+
+@each $color,
+$value in $theme-colors {
+  .bg-#{$color} {
+    @include bg-variant($value);
+  }
+}
+
+@each $color,
+$value in $theme-colors {
+  .border-#{$color} {
+    @include border-variant($value);
+  }
+}
+
+@each $color,
+$value in $theme-colors {
+  .text-#{$color} {
+    @include text-variant($value);
+  }
+}
+
+.custCalendar {
+  width: 100%;
+  background-color: #fff;
+  .week,
+  .daysBlock {
+    width: 14.285714285%;
+  }
+  .week {
+    text-align: center;
+    padding: 0.5rem;
+    font-weight: bolder;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 2px solid;
+    border-color: #888 !important;
+  }
+  .daysBlock {
+    min-height: 8rem;
+  }
+  /* 啟用的日期 不管休息或工作 */
+  .days {
+    padding: 1rem;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #888 !important;
+    &.active {
+      position: relative;
+    }
+  }
+  /* 日曆每周第一天帶有左邊線 */
+  .week:first-child,
+  .days:nth-child(7n + 1) {
+    border-left: 1px solid;
+  }
+  .dayDate {
+    font-size: 110%;
+  }
+  .dayNumber {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.1rem 0.3rem;
+  }
+  .dayTheme {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 3rem 3rem;
+    border-color: transparent transparent #FFB300 transparent;
+  }
+  .dayDate,
+  .dayType,
+  .dayWork {
+    margin-bottom: 0.3rem;
+  }
+  /* 平板小板和筆電隱藏周 */
+  @media(max-width:1199px) {
+    .week,
+    .nullBlcok {
+      display: none
+    }
+  }
+  /* 平板 */
+  @media(min-width:768px) and (max-width:1199px) {
+    .days {
+      width: 33%;
+      border: 1px solid;
+      text-align: center;
+    }
+  }
+  /* 小版 */
+  @media(max-width:767px) {
+    .days {
+      width: 100%;
+      border: 1px solid;
+      text-align: center;
+    }
+  }
+}
+
+/* 針對inputGroup內涵input與select的樣式 */
+
+.input-with-select {
+  .el-select .el-input {
+    width: 150px;
+  }
+  .el-input-group__prepend {
+    background-color: #fff;
+  }
+}

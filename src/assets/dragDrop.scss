@@ -1,0 +1,163 @@
+@import 'basic.scss';
+// 此為班別拖曳的專屬scss，但其$workClass顏色需要從basic.scss取得
+// 人員拖動時，產生小人
+.hangingMan {
+  border: 1px solid #ccc;
+  display: block;
+  padding: .2rem .5rem;
+  background: #fff;
+  border-radius: 9rem;
+  .people {
+    display: none;
+  }
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2rem;
+    left: calc(50% - 15px);
+    background: url(https://png.icons8.com/ios-glyphs/50/1e7e34/men-age-group-5.png) center top no-repeat;
+    width: 30px;
+    padding-bottom: 50px;
+  }
+}
+
+// 班別列表
+.scheduleGroup {
+  border-bottom: 1px solid #ccc;
+  >.d-flex {
+    flex-wrap: wrap;
+  }
+  /* 各班別 */
+  .scheduleGroup-item {
+    padding: .3rem .4rem .1rem;
+    text-align: center;
+    min-width: 7rem;
+    color: darken($work, 10%);
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    transition: background-color .2s;
+    &:hover,
+    &:focus {
+      background: #f7f7f7;
+      outline: 0;
+    }
+    &.active {
+      background: $work;
+      color: #fff;
+    }
+  }
+  /* 該班別說明 */
+  .scheduleGroup-intro {
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    padding: .5rem 1rem;
+    border-bottom: 0;
+  }
+}
+
+// 該日的工作窗
+.workSchedules {
+  padding: .3rem 0;
+  .background {
+    border: 1px solid darken($workClass, 5%);
+    margin-bottom: 0;
+    border-radius: 4px;
+    font-size: 1rem;
+    &[draggable="true"] {
+      cursor: grab;
+    }
+    &:not([draggable="true"]) {
+      .worksName {
+        padding-left: .5rem;
+        padding-right: .5rem;
+      }
+    }
+    /* 班別名稱 */
+    .worksName {
+      position: relative;
+      padding: .5rem .3rem;
+      background-color: $workClass;
+      color: #fff;
+      transition: all .2s;
+      &:hover {
+        background-color: darken($workClass, 10%);
+      }
+      i {
+        font-size: 80%;
+      }
+    }
+    /* 成員姓名 */
+    .memberBlock {
+      .member {
+        border-bottom: 1px solid darken($workClass, 5%);
+        &[draggable="true"] {
+          cursor: grab;
+        }
+        &:not([draggable="true"]) {
+          .name {
+            padding-left: .5rem;
+            padding-right: .5rem;
+          }
+        }
+        &:last-child {
+          border-bottom: 0
+        }
+        &:hover .name {
+          background-color: #f9f9f9;
+          i {
+            opacity: .5;
+          }
+        }
+        .name {
+          display: inline-block;
+          transition: background-color .4s;
+          padding: .4rem .2rem;
+          width: 100%;
+          i {
+            transition: opacity .3s;
+            opacity: .2
+          }
+        }
+        .people {
+          border-top: 1px solid #ccc;
+          padding: .5rem;
+          span {
+            display: inline-block;
+            margin: 0 .1rem .3rem
+          }
+        }
+      }
+    }
+  }
+  /* 人員拖動時，產生focus的效果 */
+  &.focused {
+    .background .worksName {
+      background-color: darken($workClass, 10%);
+    }
+    .background .memberBlock {
+      transition: box-shadow .2s;
+      box-shadow: inset 0px 0px 2px 1px rgba(104, 104, 104, 0.5);
+    }
+  }
+  &:last-of-type {
+    margin-bottom: 2rem
+  }
+}
+
+/*
+  To prevent user selecting inside the drag source
+  */
+
+[draggable="true"] {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.noDrag {
+  pointer-events: none;
+}
