@@ -2,7 +2,10 @@
 
 > Vue.js拖曳簡易示範
 
+# 套件來源
 [Sample 網址](https://kos0616.github.io/Vue-DragDrop/)
+
+https://github.com/kos0616/Vue-DragDrop
 
 ## 緣由
 希望藉由滑鼠拖曳動作來加速人員的班表排定，使用情境為桌上型系統。
